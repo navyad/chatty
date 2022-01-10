@@ -1,2 +1,2 @@
 # chatty
-Chat application
+Build this to learn sockets, b'cause sockets are everywhere !!
