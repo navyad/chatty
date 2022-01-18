@@ -1,4 +1,5 @@
 import socket
+import threading
 from typing import Tuple
 from constants import SERVER_HOST_PORT
 
@@ -22,7 +23,10 @@ def process_client(client_socket: socket.socket) -> None:
 
 
 if __name__ == "__main__":
-    sever_socket = setup_server(address=SERVER_HOST_PORT)
+    server_socket = setup_server(address=SERVER_HOST_PORT)
+    print("server is running")
     while True:
-        client_socket, client_address = sever_socket.accept()
-        process_client(client_socket=client_socket)
+        client_socket, client_address = server_socket.accept()
+        print(f"{client_address} connected")
+        client_thread = threading.Thread(target=process_client, args=(client_socket,))
+        client_thread.start()
